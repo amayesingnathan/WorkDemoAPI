@@ -161,8 +161,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\MovieModel.cs" />
-    <Compile Include="Models\SQLHelper.cs" />
+    <Compile Include="Data\MovieHandler.cs" />
+    <Compile Include="Data\SQLHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

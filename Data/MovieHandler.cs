@@ -7,10 +7,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
+using WorkDemoAPI.Models;
 
-namespace WorkDemoAPI.Models
+namespace WorkDemoAPI.Data
 {
-    public static class MovieModel
+    public static class MovieHandler
     {
         public static void Insert(IEnumerable<Movie> movies)
         {
@@ -49,7 +50,7 @@ namespace WorkDemoAPI.Models
                     cmd.Parameters.AddWithValue("@Title", title);
 
                     connection.Open();
-                    return MovieHelper.ToList(cmd.ExecuteReader());
+                    return SQLHelper.ToMovieList(cmd.ExecuteReader());
                 }
             }
         }
@@ -66,7 +67,7 @@ namespace WorkDemoAPI.Models
                     parameter.Value = new DateTime(year, 1, 1).Date;
 
                     connection.Open();
-                    return MovieHelper.ToList(cmd.ExecuteReader());
+                    return SQLHelper.ToMovieList(cmd.ExecuteReader());
                 }
             }
         }
@@ -81,7 +82,7 @@ namespace WorkDemoAPI.Models
                     cmd.Connection = connection;
 
                     connection.Open();
-                    List<Movie> results = MovieHelper.ToList(cmd.ExecuteReader());
+                    List<Movie> results = SQLHelper.ToMovieList(cmd.ExecuteReader());
 
                     return results;
                 }

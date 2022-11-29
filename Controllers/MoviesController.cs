@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 
 using WorkDemoAPI.Models;
+using WorkDemoAPI.Data;
 
 namespace WorkDemoAPI.Controllers
 {
@@ -13,29 +14,62 @@ namespace WorkDemoAPI.Controllers
     {
         // GET api/movies
         [Route("api/movies")]
-        public IEnumerable<Movie> Get()
+        public IHttpActionResult Get()//IEnumerable<Movie> Get()
         {
-            return MovieModel.ReadAll();
+            try
+            {
+                IEnumerable<Movie> movies = MovieHandler.ReadAll();
+                return Ok(movies);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // GET api/movies/title/The_Notebook
         [Route("api/movies/title/{title}")]
-        public IEnumerable<Movie> Get(string title)
+        public IHttpActionResult Get(string title)
         {
-            return MovieModel.ReadByTitle(title);
+            try
+            {
+                IEnumerable<Movie> movies = MovieHandler.ReadByTitle(title);
+                return Ok(movies);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         // GET api/movies/year/2004
         [Route("api/movies/year/{year}")]
-        public IEnumerable<Movie> Get(int year)
+        public IHttpActionResult Get(int year)
         {
-            return MovieModel.ReadByYear(year);
+            try
+            {
+                IEnumerable<Movie> movies = MovieHandler.ReadByYear(year);
+                return Ok(movies);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
+
         // POST api/movies
         [Route("api/movies")]
-        public void Post([FromBody] IEnumerable<Movie> movies)
+        public IHttpActionResult Post([FromBody] IEnumerable<Movie> movies)
         {
-            MovieModel.Insert(movies);
+            try
+            {
+                MovieHandler.Insert(movies);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
     }
 }
