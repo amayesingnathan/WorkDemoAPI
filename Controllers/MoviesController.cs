@@ -14,12 +14,12 @@ namespace WorkDemoAPI.Controllers
     {
         public MoviesController()
         {   
-            Logger.Init($"WorkDemoAPI-{DateTime.Now.Date.ToString("dd-MM-yy")}");
+            Logger.Init($"WorkDemoAPI-{DateTime.Now.Date.ToString("dd-MM-yy")}.log");
         }
 
         // GET api/movies
         [Route("api/movies")]
-        public IHttpActionResult Get()//IEnumerable<Movie> Get()
+        public IHttpActionResult Get()
         {
             Logger.Write("GET api/movies");
             try
@@ -38,7 +38,7 @@ namespace WorkDemoAPI.Controllers
         [Route("api/movies/title/{title}")]
         public IHttpActionResult Get(string title)
         {
-            Logger.Write("GET api/movies/title/{title}");
+            Logger.Write($"GET api/movies/title/{title}");
             try
             {
                 IEnumerable<Movie> movies = MovieHandler.ReadByTitle(title);
@@ -55,7 +55,7 @@ namespace WorkDemoAPI.Controllers
         [Route("api/movies/year/{year}")]
         public IHttpActionResult Get(int year)
         {
-            Logger.Write("GET api/movies/year/{year}");
+            Logger.Write($"GET api/movies/year/{year}");
             try
             {
                 IEnumerable<Movie> movies = MovieHandler.ReadByYear(year);

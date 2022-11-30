@@ -20,7 +20,7 @@ namespace WorkDemoAPI.Data
         {
             using (StreamWriter file = new StreamWriter(sFilename, append: true))
             {
-                file.Write("WorkDemoAPI: ");
+                file.Write($"[{DateTime.Now.ToString("HH::mm::ss")}]: ");
                 file.WriteLine(msg);
             }
         }
