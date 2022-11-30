@@ -12,10 +12,16 @@ namespace WorkDemoAPI.Controllers
 {
     public class MoviesController : ApiController
     {
+        public MoviesController()
+        {   
+            Logger.Init($"WorkDemoAPI-{DateTime.Now.Date.ToString("dd-MM-yy")}");
+        }
+
         // GET api/movies
         [Route("api/movies")]
         public IHttpActionResult Get()//IEnumerable<Movie> Get()
         {
+            Logger.Write("GET api/movies");
             try
             {
                 IEnumerable<Movie> movies = MovieHandler.ReadAll();
@@ -23,6 +29,7 @@ namespace WorkDemoAPI.Controllers
             }
             catch (Exception ex)
             {
+                Logger.Write(ex.ToString());
                 return InternalServerError(ex);
             }
         }
@@ -31,6 +38,7 @@ namespace WorkDemoAPI.Controllers
         [Route("api/movies/title/{title}")]
         public IHttpActionResult Get(string title)
         {
+            Logger.Write("GET api/movies/title/{title}");
             try
             {
                 IEnumerable<Movie> movies = MovieHandler.ReadByTitle(title);
@@ -38,6 +46,7 @@ namespace WorkDemoAPI.Controllers
             }
             catch (Exception ex)
             {
+                Logger.Write(ex.ToString());
                 return InternalServerError(ex);
             }
         }
@@ -46,6 +55,7 @@ namespace WorkDemoAPI.Controllers
         [Route("api/movies/year/{year}")]
         public IHttpActionResult Get(int year)
         {
+            Logger.Write("GET api/movies/year/{year}");
             try
             {
                 IEnumerable<Movie> movies = MovieHandler.ReadByYear(year);
@@ -53,6 +63,7 @@ namespace WorkDemoAPI.Controllers
             }
             catch (Exception ex)
             {
+                Logger.Write(ex.ToString());
                 return InternalServerError(ex);
             }
         }
@@ -61,6 +72,7 @@ namespace WorkDemoAPI.Controllers
         [Route("api/movies")]
         public IHttpActionResult Post([FromBody] IEnumerable<Movie> movies)
         {
+            Logger.Write("POST api/movies");
             try
             {
                 MovieHandler.Insert(movies);
@@ -68,6 +80,7 @@ namespace WorkDemoAPI.Controllers
             }
             catch (Exception ex)
             {
+                Logger.Write(ex.ToString());
                 return InternalServerError(ex);
             }
         }

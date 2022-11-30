@@ -21,6 +21,7 @@ namespace WorkDemoAPI.Data
                 {
                     using (var cmd = new SqlCommand())
                     {
+                        Logger.Write($"SQL Stored Procedure: dbo.Movies_Insert\nParameter(s): {movie}");
                         cmd.CommandText = "dbo.Movies_Insert";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Connection = connection;
@@ -44,6 +45,7 @@ namespace WorkDemoAPI.Data
             {
                 using (var cmd = new SqlCommand())
                 {
+                    Logger.Write($"SQL Stored Procedure: dbo.Movies_GetByTitle\nParameter(s): {title}");
                     cmd.CommandText = "dbo.Movies_GetByTitle";
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = connection;
@@ -60,6 +62,7 @@ namespace WorkDemoAPI.Data
             {
                 using (var cmd = new SqlCommand())
                 {
+                    Logger.Write($"SQL Stored Procedure: dbo.Movies_GetByYear\nParameter(s): {year}");
                     cmd.CommandText = "dbo.Movies_GetByYear";
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Connection = connection;
@@ -77,6 +80,7 @@ namespace WorkDemoAPI.Data
             {
                 using (var cmd = new SqlCommand())
                 {
+                    Logger.Write($"SQL Command: SELECT * FROM Movies");
                     cmd.CommandText = "SELECT * FROM Movies";
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = connection;
